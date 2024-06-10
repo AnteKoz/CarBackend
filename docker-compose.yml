@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+
+  carbackend:
+    container_name: carbackend
+    build: # this is the build context: .
+      context: .
+      dockerfile: Dockerfile
+      args: # these are the arguments that are passed to the dockerfile
+        DB_URL: ${DB_URL}
+        PG_USER: ${PG_USER}
+        PG_PASSWORD: ${PG_PASSWORD}
+    ports: # port exposed to the host machine
+      - "8080:8080"
+    environment: # these are the environment variables that are passed to the dockerfile
+      DB_URL: jdbc:postgresql://postgresdb:5432/postgres
+      PG_USER: postgres
+      PG_PASSWORD: pass
+    depends_on: # this is the dependency on the db service
+      - postgresdb
+    networks:
+      - carnet
+
+  postgresdb:
+    container_name: postgresdb
+    image: 'postgres:15-alpine'
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+    volumes:
+      - 'postgresdb-volume:/var/lib/postgresql/data'
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - carnet
+
+volumes:
+  postgresdb-volume:
+
+networks:
+  carnet:
+    driver: bridge
