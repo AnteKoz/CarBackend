@@ -25,8 +25,7 @@ class CarController(val service: CarService,
             @RequestParam(name = "lang", required = false) lang: String?
             ): String? {
         log.info("Calling Endpoint api/v1/equipment with Version V1")
-
-        return i18nService.getLanguageDescriptionByCode(service.getDescriptionByBrandAndCodeV1(brand, code, lang ))
+        return i18nService.getLanguageDescriptionByCode(service.getDescriptionByBrandAndCodeV1(brand, code, lang ), lang)
     }
 
     @GetMapping("/api/v2/equipment")
