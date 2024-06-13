@@ -13,7 +13,6 @@ import java.util.*
 
 @Service
 class CarService(private val repository: CarRepository,
-                 private val messageSource: MessageSource,
                  private val mapper: CarMapper
                 ) {
 
@@ -28,7 +27,7 @@ class CarService(private val repository: CarRepository,
         return foundCars.first()
     }
 
-    fun getDescriptionByBrandAndCodeV2(carDataDTO: CarDataDTO, locale: String? ): String? {
+    fun getDescriptionByBrandAndCodeV2(carDataDTO: CarDataDTO, locale: String? ): CarData {
 
         val language = if (locale != null) Locale(locale) else Locale.getDefault()
         log.info("carDataDTO: {}", carDataDTO)
@@ -36,6 +35,6 @@ class CarService(private val repository: CarRepository,
         log.info("mapping: {}", mapping)
         val carData = repository.findById(mapping.id)
         log.info("CarData: {}", carData.get())
-        return messageSource.getMessage( carData.get().description ?: "error", null, language)
+        return carData.get()
     }
 }

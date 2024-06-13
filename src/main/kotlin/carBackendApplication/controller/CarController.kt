@@ -34,6 +34,6 @@ class CarController(val service: CarService,
             @RequestBody carDataDTO: CarDataDTO
     ): String? {
         log.info("Calling Endpoint /api/v2/equipment with Version V2")
-        return service.getDescriptionByBrandAndCodeV2(carDataDTO, lang)
+        return i18nService.getLanguageDescriptionByCode(service.getDescriptionByBrandAndCodeV2(carDataDTO, lang), lang)
     }
 }
