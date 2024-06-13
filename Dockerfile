@@ -14,4 +14,4 @@ RUN ./gradlew clean build -x test
 EXPOSE 8080
 
 # Run the jar file
-CMD ["java", "-jar", "./build/libs/CarBackend-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "./build/libs/mockk-0.0.1-SNAPSHOT.jar"]

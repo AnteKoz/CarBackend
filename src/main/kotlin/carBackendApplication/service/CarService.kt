@@ -1,6 +1,7 @@
 package carBackendApplication.service
 
 
+import carBackendApplication.domain.CarData
 import carBackendApplication.dto.CarDataDTO
 import carBackendApplication.mapper.CarMapper
 import carBackendApplication.repository.CarRepository
@@ -18,31 +19,13 @@ class CarService(private val repository: CarRepository,
 
     private val log = LoggerFactory.getLogger(this.javaClass)
 
-    fun getDescriptionByBrandAndCodeV1 (brand: String, code: String, locale: String?): String? {
+    fun getDescriptionByBrandAndCodeV1 (brand: String, code: String, locale: String?): CarData {
 
         val language = if (locale != null) Locale(locale) else Locale.getDefault()
         val foundCars = repository.findByBrandAndCode(brand, code)
         log.info("FoundCars: {}", foundCars)
-        var description = ""
-        foundCars.map {
-            if(locale?.let { e -> it.description.endsWith(locale) } == true){
-              description = it.description
-            }
-        }
-        if (description == "") {
-            foundCars.map {
-                if(locale?.let { e -> it.description.endsWith("en") } == true){
-                    description = it.description
-                }
-            }
-        }
-        log.info("Description: {}", description)
-        return try {
-            messageSource.getMessage(description, null, language)
-        } catch (e: NoSuchMessageException) {
-            messageSource.getMessage(description, null, Locale.getDefault())
-        }
-
+        log.info("Property: {}", foundCars[0].InnerCarData().getI18N())
+        return foundCars.first()
     }
 
     fun getDescriptionByBrandAndCodeV2(carDataDTO: CarDataDTO, locale: String? ): String? {

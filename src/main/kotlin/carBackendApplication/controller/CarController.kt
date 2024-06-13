@@ -2,6 +2,7 @@ package carBackendApplication.controller
 
 import carBackendApplication.dto.CarDataDTO
 import carBackendApplication.service.CarService
+import carBackendApplication.service.I18nService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.parameters.RequestBody
 import lombok.RequiredArgsConstructor
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class CarController(val service: CarService) {
+class CarController(val service: CarService,
+                    val i18nService: I18nService) {
+
     private val log = LoggerFactory.getLogger(this.javaClass)
 
 
@@ -22,7 +25,8 @@ class CarController(val service: CarService) {
             @RequestParam(name = "lang", required = false) lang: String?
             ): String? {
         log.info("Calling Endpoint api/v1/equipment with Version V1")
-        return service.getDescriptionByBrandAndCodeV1(brand, code, lang )
+
+        return i18nService.getLanguageDescriptionByCode(service.getDescriptionByBrandAndCodeV1(brand, code, lang ))
     }
 
     @GetMapping("/api/v2/equipment")
