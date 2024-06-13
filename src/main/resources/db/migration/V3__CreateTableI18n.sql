@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS I18n(
+    id BIGINT PRIMARY KEY,
+    lang VARCHAR(255),
+    code VARCHAR(255),
+    trans VARCHAR(255)
+
+);

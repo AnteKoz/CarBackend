@@ -1,0 +1,1 @@
+insert into I18n(id, lang, code, trans) values (1, 'de', 'i18n.carbackend.code.11111', 'Lenkrad')
