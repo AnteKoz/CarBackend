@@ -17,6 +17,10 @@ services:
       DB_URL: jdbc:postgresql://postgresdb:5432/postgres
       PG_USER: postgres
       PG_PASSWORD: pass
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/postgres
+      SPRING_FLYWAY_URL: jdbc:postgresql://postgresdb:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: pass
     depends_on: # this is the dependency on the db service
       - postgresdb
     networks:
