@@ -60,11 +60,11 @@ jobs:
     - name: Download Backend Artifact
       uses: actions/download-artifact@v2
       with:
-        name: backend-jar
-        path: backend/build/libs
+        name: mockk-0.0.1-SNAPSHOT.jar
+        path: build/libs
 
     - name: Upload Backend Artifact to Repository
       uses: actions/upload-artifact@v2
       with:
-        name: backend-jar
-        path: backend/build/libs/backend.jar
+        name: mockk-0.0.1-SNAPSHOT.jar
+        path: build/libs/mockk-0.0.1-SNAPSHOT.jar
