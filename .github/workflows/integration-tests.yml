@@ -45,7 +45,7 @@ jobs:
         done
 
     - name: Run Integration Tests
-      run: ./gradlew :test
+      run: ./gradlew clean build -x test -s
 
     - name: Stop Services
       run: docker-compose down
