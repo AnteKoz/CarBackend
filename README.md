@@ -7,5 +7,7 @@ Afterwards start the Application with the command `gradle bootRun`.
 
 To see a detailed view of the Endpoint provided navigate to the url: `http://localhost:8080/swagger-ui/index.html`
 
+GutHub Action: `build` `Test`
+
 
 
