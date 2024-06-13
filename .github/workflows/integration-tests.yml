@@ -1,0 +1,36 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Compose
+      run: sudo apt-get -y install docker-compose
+
+    - name: Build and Start Services
+      run: docker-compose up -d --build
+
+    - name: Wait for Services to be Healthy
+      run: |
+        echo "Waiting for backend-service to be healthy..."
+        while ! curl -sSf http://localhost:8080/actuator/health; do
+          sleep 10
+        done
+
+    - name: Run Integration Tests
+      run: ./gradlew :test
+
+    - name: Stop Services
+      run: docker-compose down
