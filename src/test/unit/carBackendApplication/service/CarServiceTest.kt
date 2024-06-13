@@ -20,25 +20,21 @@ class CarServiceTest {
     @Test
     fun getDescriptionV1(){
         val mockBookRepository = Mockito.mock(CarRepository::class.java)
-        val messageSource = Mockito.mock(MessageSource::class.java)
         val mapper = Mockito.mock(CarMapper::class.java)
         val carDataList = listOf(
             CarData(1, "Mercedes", "11111", "Mercedes_11111_de"))
 
         Mockito.`when`(mockBookRepository.findByBrandAndCode("Mercedes", "11111")).thenReturn(carDataList)
-        Mockito.`when`(messageSource.getMessage(carDataList.first().description, null, Locale("de"))).thenReturn("Tür")
 
-        val expected = "Tür"
 
-        val sut = CarService(mockBookRepository, messageSource, mapper)
+        val sut = CarService(mockBookRepository, mapper)
         val actual = sut.getDescriptionByBrandAndCodeV1("Mercedes", "11111", "de")
-        assertEquals(expected, actual)
+        assertEquals(carDataList.first(), actual)
     }
 
     @Test
     fun getDescriptionV2(){
         val mockBookRepository = Mockito.mock(CarRepository::class.java)
-        val messageSource = Mockito.mock(MessageSource::class.java)
         val mapper = Mockito.mock(CarMapper::class.java)
         val carDataList = listOf(
             CarData(1, "BMW", "12345", "Tür"))
@@ -47,12 +43,9 @@ class CarServiceTest {
 
         Mockito.`when`(mapper.carDataDTOtoCarData(carDataDTO)).thenReturn(carData)
         Mockito.`when`(mockBookRepository.findById( carData.id)).thenReturn(Optional.of(carData))
-        Mockito.`when`(messageSource.getMessage(carDataList.first().description, null, Locale("de"))).thenReturn("Tür")
 
-        val expected = "Tür"
-
-        val sut = CarService(mockBookRepository, messageSource, mapper)
+        val sut = CarService(mockBookRepository, mapper)
         val actual = sut.getDescriptionByBrandAndCodeV2(carDataDTO, "de")
-        assertEquals(expected, actual)
+        assertEquals(carDataList.first().InnerCarData().getI18N(), actual.InnerCarData().getI18N())
     }
 }
