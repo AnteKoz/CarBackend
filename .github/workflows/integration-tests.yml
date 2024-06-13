@@ -25,6 +25,7 @@ jobs:
     - name: Wait for Services to be Healthy
       run: |
         echo "Waiting for backend-service to be healthy..."
+        docker logs carbackend
         while ! curl -sSf http://localhost:8080; do
           sleep 10
         done
