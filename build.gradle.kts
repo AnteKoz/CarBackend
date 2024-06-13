@@ -9,9 +9,8 @@ plugins {
 	kotlin("kapt") version "2.0.0"
 	id("org.flywaydb.flyway") version "9.0.1"
 }
-
-group = "carBackendApplication"
-version = "0.0.1-SNAPSHOT"
+group = "CarBackend"
+version = "1.0.0"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -36,7 +35,7 @@ repositories {
 	}
 }
 base {
-	archivesBaseName = "mockk"
+	archivesBaseName = "carBackend"
 }
 
 dependencies {
