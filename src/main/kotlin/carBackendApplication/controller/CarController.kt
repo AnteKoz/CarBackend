@@ -20,7 +20,7 @@ class CarController(val service: CarService,
 
     @GetMapping("/api/v1/equipment")
     @Operation(summary = "Find Equipment by Brand and Code")
-    fun get(@RequestParam(name = "brand", required = true) brand: String,
+    fun getTranslationEquipment(@RequestParam(name = "brand", required = true) brand: String,
             @RequestParam(name = "code", required = true) code: String,
             @RequestParam(name = "lang", required = false) lang: String?
             ): String? {
