@@ -36,14 +36,6 @@ jobs:
     - name: List build/libs directory
       run: ls -la build/libs
 
-    - name: Wait for Services to be Healthy
-      run: |
-        echo "Waiting for backend-service to be healthy..."
-        docker logs carbackend
-        while ! curl -sSf http://localhost:8080; do
-          sleep 10
-        done
-
     - name: Run Integration Tests
       run: ./gradlew :test -S
 
@@ -52,4 +44,3 @@ jobs:
       with:
         name: carBackend-build
         path: build/libs
-      
