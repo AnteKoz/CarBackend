@@ -30,6 +30,12 @@ jobs:
         overwrite-settings: true
         job-status: 'success'
 
+    - name: Build with Gradle (excluding tests)
+      run: ./gradlew clean build -x test
+
+    - name: List build/libs directory
+      run: ls -la build/libs
+
     - name: Set up Docker Compose
       run: sudo apt-get -y install docker-compose
 
