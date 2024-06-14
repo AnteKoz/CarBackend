@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # build the project avoiding tests
-#RUN ./gradlew clean build -x test
+RUN ./gradlew clean build -x test
 
 # Expose port 8080
 EXPOSE 8080

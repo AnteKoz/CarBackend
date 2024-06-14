@@ -30,9 +30,6 @@ jobs:
         overwrite-settings: true
         job-status: 'success'
 
-    - name: Build with Gradle (excluding tests)
-      run: ./gradlew clean build -x test
-
     - name: Set up Docker Compose
       run: sudo apt-get -y install docker-compose
 
@@ -59,12 +56,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Download Backend Artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: carBackend-build
-        path: build/libs
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v2
