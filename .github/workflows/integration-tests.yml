@@ -32,7 +32,7 @@ jobs:
 
     - name: Build with Gradle (excluding tests)
       run: ./gradlew clean build -x test
-      
+
     - name: Set up Docker Compose
       run: sudo apt-get -y install docker-compose
 
@@ -64,10 +64,10 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: carBackend-1.0.0.jar
-        path: ./build/libs
+        path: build/libs
 
     - name: Upload Backend Artifact to Repository
       uses: actions/upload-artifact@v2
       with:
         name: carBackend-1.0.0.jar
-        path: ./build/libs/carBackend-1.0.0.jar
+        path: build/libs/carBackend-1.0.0.jar
