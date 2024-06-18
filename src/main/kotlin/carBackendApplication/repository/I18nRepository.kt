@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 
 interface I18nRepository: JpaRepository<I18nLanguageFilter, Int> {
-    fun findByCodeAndLang(code: String, lang: String?): Optional<I18nLanguageFilter>
+    fun findByCodeAndLang(code: String, lang: String?): List<I18nLanguageFilter>
 }

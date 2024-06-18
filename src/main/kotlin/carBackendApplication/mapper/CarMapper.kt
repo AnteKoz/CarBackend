@@ -8,8 +8,11 @@ import org.mapstruct.Mapping
 @Mapper(componentModel = "spring")
 interface CarMapper {
 
-    fun carToCarDTO(carData: CarData): CarDataDTO
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "description", ignore = true)
+    fun carDataDTOtoCarData(carDataDTO: CarDataDTO): CarData
 
     @Mapping(target = "id", source = "id")
-    fun carDataDTOtoCarData(carDataDTO: CarDataDTO): CarData
+    @Mapping(target = "description", ignore = true)
+    fun carDataToCarDTO(carData: CarData): CarDataDTO
 }

@@ -15,11 +15,11 @@ import lombok.Setter
 class CarData(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    internal val id: Long,
-    internal val brand: String,
-    internal val code: String,
+    val id: Long,
+    val brand: String,
+    val code: String,
     @Transient
-    internal val description: String
+    val description: String?
 
 ) {
 

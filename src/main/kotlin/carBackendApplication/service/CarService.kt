@@ -20,7 +20,6 @@ class CarService(private val repository: CarRepository,
 
     fun getDescriptionByBrandAndCodeV1 (brand: String, code: String, locale: String?): CarData {
 
-        val language = if (locale != null) Locale(locale) else Locale.getDefault()
         val foundCars = repository.findByBrandAndCode(brand, code)
         log.info("FoundCars: {}", foundCars)
         log.info("Property: {}", foundCars[0].InnerCarData().getI18N())
@@ -29,10 +28,8 @@ class CarService(private val repository: CarRepository,
 
     fun getDescriptionByBrandAndCodeV2(carDataDTO: CarDataDTO, locale: String? ): CarData {
 
-        val language = if (locale != null) Locale(locale) else Locale.getDefault()
         log.info("carDataDTO: {}", carDataDTO)
-        val mapping = mapper.carDataDTOtoCarData(carDataDTO) // COntroller
-        log.info("mapping: {}", mapping)
+        val mapping = mapper.carDataDTOtoCarData(carDataDTO)
         val carData = repository.findById(mapping.id)
         log.info("CarData: {}", carData.get())
         return carData.get()

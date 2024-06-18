@@ -1,15 +1,13 @@
-package CarBackendExample.CarBackend.unit.carBackendApplication.service
+package carBackendApplication.service
 
 import carBackendApplication.domain.CarData
 import carBackendApplication.dto.CarDataDTO
 import carBackendApplication.mapper.CarMapper
 import carBackendApplication.repository.CarRepository
-import carBackendApplication.service.CarService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.mockito.Mockito
 import org.springframework.boot.SpringBootConfiguration
-import org.springframework.context.MessageSource
 import org.springframework.test.context.ContextConfiguration
 import java.util.*
 

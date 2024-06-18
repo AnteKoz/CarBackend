@@ -1,46 +1,36 @@
 package carBackendApplication.controller
 
 
+import carBackendApplication.domain.CarData
 import carBackendApplication.service.CarService
+import carBackendApplication.service.I18nService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
-import org.mockito.Mockito.*
+import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.test.context.NestedTestConfiguration
+import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 
-//@WebMvcTest(controllers = [CarController::class])
-//@AutoConfigureWebTestClient
-//@ActiveProfiles("test")
-class CarControllerUnitTest {
+@WebMvcTest
+class CarControllerUnitTest(@Autowired val mockMvc: MockMvc, @Autowired i18nService: I18nService) {
 
-    //@Autowired
-    //lateinit var webTestClient: WebTestClient
-    //@MockkBean
-    //private lateinit var carServiceMock: CarService
+        @MockkBean
+        lateinit var carService: CarService
 
-    @Test
-    fun retrieveDescription(){
-        //Mockito.`when`(carServiceMock.getDescriptionByBrandAndCodeV1("BMW", "99999", "en")).thenReturn("steering wheel")
-        //every { carServiceMock.getDescriptionByBrandAndCodeV1(any(), any(), any()) } returns ""
-       // val result = webTestClient.get()
-         //   .uri {uriBuilder -> uriBuilder
-           //     .path("/api/v1/equipment")
-           //     .queryParam("brand" , "BMW")
-           //     .queryParam("code", "99999")
-           //     .queryParam("lang", "en")
-           //     .build()
-           // }.exchange()
-           // .expectStatus().is2xxSuccessful
-           // .expectBody(String::class.java)
-           // .returnResult()
+        
+        fun retrieveDescription(){
 
-        //Assertions.assertEquals("steering wheel", result.responseBody)
-    }
+            val carData = CarData(1L, "Mercedes", "11111", "")
+            every { carService.getDescriptionByBrandAndCodeV1(carData.brand, carData.code, "de") } returns carData
+
+            mockMvc.perform(get("/api/bankAccount?id=2"))
+                .andExpect(status().isBadRequest);
+
+        }
 }

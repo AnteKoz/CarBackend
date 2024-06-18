@@ -2,6 +2,7 @@ package carBackendApplication.controller
 
 import carBackendApplication.domain.CarData
 import carBackendApplication.domain.I18nLanguageFilter
+import carBackendApplication.mapper.CarMapper
 import carBackendApplication.repository.CarRepository
 import carBackendApplication.repository.I18nRepository
 import org.junit.jupiter.api.*
@@ -22,7 +23,6 @@ import org.testcontainers.utility.DockerImageName
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-@AutoConfigureWebTestClient(timeout = "36000")
 @Testcontainers
 @ExtendWith(SpringExtension::class)
 class CarControllerIntegrationTest() {
@@ -35,6 +35,9 @@ class CarControllerIntegrationTest() {
 
     @Autowired
     lateinit var carController: CarController
+
+    @Autowired
+    lateinit var mapper: CarMapper
 
     companion object {
         @Container
@@ -73,7 +76,8 @@ class CarControllerIntegrationTest() {
 
         i18nRepository.deleteAll()
         val i18n = I18nLanguageFilter(1L, "de", "i18n.carbackend.code.11111", "Lenkrad")
-        i18nRepository.saveAll(listOf( i18n))
+        val i18n2 = I18nLanguageFilter(1L, "en", "i18n.carbackend.code.11111", "steering wheel")
+        i18nRepository.saveAll(listOf( i18n, i18n2))
 
     }
 
@@ -84,11 +88,27 @@ class CarControllerIntegrationTest() {
     }
 
     @Test
-    fun retrieveDescription(){
+    fun retrieveTranslationFromV1(){
         val carData = repository.findAll().first()
         val result = carController.getTranslationEquipment(carData.brand,carData.code,"de")
 
         Assertions.assertEquals("Lenkrad", result)
         Assertions.assertNotNull(result)
+    }
+
+    @Test
+    fun retrieveTranslationFromV1WithOutLanguage(){
+        val carData = repository.findAll().first()
+        val result = carController.getTranslationEquipment(carData.brand,carData.code,null)
+
+        Assertions.assertEquals("steering wheel", result)
+        Assertions.assertNotNull(result)
+    }
+
+
+    @Test
+    fun retrieveTranslationV2WithoutLanguageSet() {
+        val result = carController.getTranslationEquipmentV2(null, mapper.carDataToCarDTO(repository.findAll().first()))
+        Assertions.assertEquals(result, "steering wheel")
     }
 }

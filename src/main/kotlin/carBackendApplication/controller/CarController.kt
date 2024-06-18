@@ -30,7 +30,7 @@ class CarController(val service: CarService,
 
     @GetMapping("/api/v2/equipment")
     @Operation(summary = "Find Equipment by Brand and Code")
-    fun get(@RequestParam(name = "lang", required = false) lang: String?,
+    fun getTranslationEquipmentV2(@RequestParam(name = "lang", required = false) lang: String?,
             @RequestBody carDataDTO: CarDataDTO
     ): String? {
         log.info("Calling Endpoint /api/v2/equipment with Version V2")
