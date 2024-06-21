@@ -34,4 +34,11 @@ class CarService(private val repository: CarRepository,
         log.info("CarData: {}", carData.get())
         return carData.get()
     }
+
+    fun getAllCars() : MutableList<CarData> {
+
+        return repository.findAll()
+        //carData.forEach { car -> car.description = car.InnerCarData().getI18N() }
+        //return carData
+    }
 }
