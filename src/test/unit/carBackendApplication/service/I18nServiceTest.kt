@@ -18,7 +18,7 @@ class I18nServiceTest {
     fun getLanguageDescriptionByCodeWithValidData() {
         val i18nRepository = Mockito.mock(I18nRepository::class.java)
         val i18n = listOf(I18nLanguageFilter(1L, "en", "i18n.carbackend.code.11111", "steering wheel"))
-        val carData =  CarData(1L, "Mercedes", "11111", "Lenkrad")
+        val carData =  CarData(1L, "Mercedes", "PWK","S-Klasse","11111", "Lenkrad")
         println(carData.InnerCarData().getI18N())
         println(carData)
 

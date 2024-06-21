@@ -20,7 +20,7 @@ class CarServiceTest {
         val mockBookRepository = Mockito.mock(CarRepository::class.java)
         val mapper = Mockito.mock(CarMapper::class.java)
         val carDataList = listOf(
-            CarData(1, "Mercedes", "11111", "Mercedes_11111_de"))
+            CarData(1, "Mercedes", "PKW", "W124", "11111", "Mercedes_11111_de"))
 
         Mockito.`when`(mockBookRepository.findByBrandAndCode("Mercedes", "11111")).thenReturn(carDataList)
 
@@ -35,9 +35,9 @@ class CarServiceTest {
         val mockBookRepository = Mockito.mock(CarRepository::class.java)
         val mapper = Mockito.mock(CarMapper::class.java)
         val carDataList = listOf(
-            CarData(1, "BMW", "12345", "Tür"))
-        val carDataDTO = CarDataDTO(1, "BMW", "12345", "Tür")
-        val carData = CarData(1, "BMW", "12345", "Tür")
+            CarData(1, "BMW", "PWK", "G20", "12345", "Tür"))
+        val carDataDTO = CarDataDTO(1, "BMW", "PWK", "G20", "12345", "Tür")
+        val carData = CarData(1, "BMW", "PWK", "G20", "12345", "Tür")
 
         Mockito.`when`(mapper.carDataDTOtoCarData(carDataDTO)).thenReturn(carData)
         Mockito.`when`(mockBookRepository.findById( carData.id)).thenReturn(Optional.of(carData))

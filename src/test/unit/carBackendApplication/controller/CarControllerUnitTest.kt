@@ -23,10 +23,10 @@ class CarControllerUnitTest(@Autowired val mockMvc: MockMvc, @Autowired i18nServ
         @MockkBean
         lateinit var carService: CarService
 
-        
+
         fun retrieveDescription(){
 
-            val carData = CarData(1L, "Mercedes", "11111", "")
+            val carData = CarData(1L, "Mercedes", "PWK","S-Klasse","11111", "")
             every { carService.getDescriptionByBrandAndCodeV1(carData.brand, carData.code, "de") } returns carData
 
             mockMvc.perform(get("/api/bankAccount?id=2"))

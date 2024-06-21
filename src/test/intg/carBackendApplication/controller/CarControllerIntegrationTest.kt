@@ -71,7 +71,7 @@ class CarControllerIntegrationTest() {
     fun setUp() {
 
         repository.deleteAll()
-        val carData = CarData(1L, "Mercedes", "11111", "Lenkrad")
+        val carData = CarData(1L, "Mercedes", "PKW", "PWK", "11111","Lenkrad")
         repository.save(carData)
 
         i18nRepository.deleteAll()
