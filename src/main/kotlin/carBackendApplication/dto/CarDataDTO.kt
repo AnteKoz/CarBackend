@@ -1,6 +1,5 @@
 package carBackendApplication.dto
 
-import jakarta.persistence.Entity
 import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
@@ -13,5 +12,7 @@ import lombok.Setter
 data class CarDataDTO(
     val id: Long,
     val brand: String,
+    val type: String,
+    val model: String,
     val code: String,
     val description: String?)

@@ -17,9 +17,11 @@ class CarData(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
     val brand: String,
+    val type: String,
+    val model: String,
     val code: String,
     @Transient
-    val description: String?
+    var description: String?
 
 ) {
 
