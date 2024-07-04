@@ -1,6 +1,7 @@
 package carBackendApplication.controller
 
 import carBackendApplication.domain.CarData
+import carBackendApplication.domain.ThreadLocalContext
 import carBackendApplication.dto.CarDataDTO
 import carBackendApplication.service.CarService
 import carBackendApplication.service.I18nService
@@ -27,8 +28,12 @@ class CarController(val service: CarService,
             @RequestParam(name = "lang", required = false) lang: String?
             ): String? {
         log.info("Calling Endpoint api/v1/equipment with Version V1")
-        //ThreadLocal.withInitial {  }
-        return i18nService.getLanguageDescriptionByCode(brand,code, lang)
+        if (ThreadLocalContext.userThreadLocal.get() == "" || ThreadLocalContext.userThreadLocal.get() == null) {
+            ThreadLocalContext.userThreadLocal.set(i18nService.getLanguageDescriptionByCode(brand, code, lang))
+            return ThreadLocalContext.userThreadLocal.get()
+        } else {
+            return ThreadLocalContext.userThreadLocal.get()
+        }
     }
 
     @GetMapping("/api/v2/equipment")
