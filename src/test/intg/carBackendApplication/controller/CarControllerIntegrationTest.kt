@@ -89,9 +89,9 @@ class CarControllerIntegrationTest() {
     @Test
     fun retrieveTranslationFromV1(){
         val carData = repository.findAll().first()
-        val result = carController.getTranslationEquipment(carData.brand,carData.code,"de")
+        val result = carController.getTranslationEquipment(carData.brand, carData.code,"en")
 
-        Assertions.assertEquals("Lenkrad", result)
+        Assertions.assertEquals("steering wheel", result)
         Assertions.assertNotNull(result)
     }
 
