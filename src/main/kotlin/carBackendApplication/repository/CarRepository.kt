@@ -1,6 +1,7 @@
 package carBackendApplication.repository
 
 import carBackendApplication.domain.CarData
+import carBackendApplication.dto.CarDataDTO
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 

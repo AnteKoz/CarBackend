@@ -27,7 +27,8 @@ class CarController(val service: CarService,
             @RequestParam(name = "lang", required = false) lang: String?
             ): String? {
         log.info("Calling Endpoint api/v1/equipment with Version V1")
-        return i18nService.getLanguageDescriptionByCode(service.getDescriptionByBrandAndCodeV1(brand, code, lang ), lang)
+        //ThreadLocal.withInitial {  }
+        return i18nService.getLanguageDescriptionByCode(brand,code, lang)
     }
 
     @GetMapping("/api/v2/equipment")
@@ -36,7 +37,7 @@ class CarController(val service: CarService,
             @RequestBody carDataDTO: CarDataDTO
     ): String? {
         log.info("Calling Endpoint /api/v2/equipment with Version V2")
-        return i18nService.getLanguageDescriptionByCode(service.getDescriptionByBrandAndCodeV2(carDataDTO, lang), lang)
+        return i18nService.getLanguageDescriptionByCarDataDto(carDataDTO, lang)
     }
 
     @CrossOrigin(origins = ["http://localhost:3000/"], maxAge = 3600)
