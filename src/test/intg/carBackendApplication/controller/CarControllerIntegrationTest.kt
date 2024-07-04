@@ -58,7 +58,7 @@ class CarControllerIntegrationTest() {
             registry.add("spring.flyway.user", postgresDB::getUsername)
             registry.add("spring.flyway.password", postgresDB::getPassword)
         }
-
+//HAHAH
         @JvmStatic
         @AfterAll
         fun afterAll(): Unit {
