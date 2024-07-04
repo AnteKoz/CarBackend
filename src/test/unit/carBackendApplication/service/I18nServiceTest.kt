@@ -7,7 +7,6 @@ import carBackendApplication.mapper.CarMapper
 import carBackendApplication.repository.CarRepository
 import carBackendApplication.repository.I18nRepository
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.mockito.Mock
 import org.mockito.Mockito
 import org.springframework.boot.SpringBootConfiguration
 import org.springframework.test.context.ContextConfiguration
