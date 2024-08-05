@@ -28,12 +28,8 @@ class CarController(val service: CarService,
             @RequestParam(name = "lang", required = false) lang: String?
             ): String? {
         log.info("Calling Endpoint api/v1/equipment with Version V1")
-        if (ThreadLocalContext.userThreadLocal.get() == "" || ThreadLocalContext.userThreadLocal.get() == null) {
             ThreadLocalContext.userThreadLocal.set(i18nService.getLanguageDescriptionByCode(brand, code, lang))
             return ThreadLocalContext.userThreadLocal.get()
-        } else {
-            return ThreadLocalContext.userThreadLocal.get()
-        }
     }
 
     @GetMapping("/api/v2/equipment")

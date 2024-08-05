@@ -8,6 +8,7 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.24"
 	kotlin("kapt") version "2.0.0"
 	id("org.flywaydb.flyway") version "9.0.1"
+	application
 }
 group = "CarBackend"
 version = "1.0.0"
@@ -39,6 +40,17 @@ base {
 }
 
 dependencies {
+
+	implementation(kotlin("stdlib"))
+	implementation("software.amazon.awssdk:s3:2.26.9")
+	implementation("software.amazon.awssdk:ec2:2.26.9")
+	implementation("software.amazon.awssdk:iam:2.26.9")
+	implementation("software.amazon.awssdk:rds:2.26.9")
+	implementation("software.amazon.awssdk:route53:2.26.9")
+	implementation("software.amazon.awssdk:cloudwatch:2.26.9")
+	implementation("software.amazon.awscdk:aws-cdk-lib:2.147.1")
+	implementation("software.constructs:constructs:10.x.x")
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

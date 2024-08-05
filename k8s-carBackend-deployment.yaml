@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cardbackend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cardbackend-app
+  template:
+    metadata:
+      labels:
+        app: cardbackend-app
+    spec:
+      containers:
+        - name: cardbackend-container
+          image: hajdukante/carbackend-carbackend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-service:5432/postgres
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cardbackend-service
+spec:
+  selector:
+    app: cardbackend-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer  # Ändere dies zu ClusterIP oder NodePort, je nach Bedarf
